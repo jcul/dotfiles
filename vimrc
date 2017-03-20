@@ -31,6 +31,9 @@ set ignorecase
 set smartcase
 "set autochdir
 
+set path+=**
+set wildmenu
+
 " Remember Stuff
 set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo
                         " file -- 20 jump links, regs up to 500 lines'
@@ -60,7 +63,7 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
-set tags=tags;
+set tags=tags
 
 cmap w!! w !sudo tee > /dev/null %
 
