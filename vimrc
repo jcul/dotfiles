@@ -52,6 +52,14 @@ imap <F4> <C-R>=strftime("%d-%m-%Y %I:%M %p")<CR>
 nnoremap <F5> :wall <CR>:make -j8<CR>
 set pastetoggle=<F11>
 
+function GetScratch()
+    enew
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+endfunction
+nnoremap <F7> :call GetScratch()<CR>
+
 set scrolloff=5
 
 set colorcolumn=81
