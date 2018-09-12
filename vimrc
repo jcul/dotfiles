@@ -1,6 +1,8 @@
 " colorscheme desert
+execute pathogen#infect()
 syntax on
 filetype plugin indent on
+color dracula
 set cinoptions=g0
 
 "let g:pathogen_disabled = []
@@ -34,6 +36,11 @@ set smartcase
 set path+=**
 set wildmenu
 
+"set backup
+set backupdir=./.backup//,~/.backup//,.,/tmp//
+set directory=./.backup//,~/.backup//,.,/tmp//
+set nobackup
+
 " Remember Stuff
 set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo
                         " file -- 20 jump links, regs up to 500 lines'
@@ -45,11 +52,16 @@ map <F1> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 noremap <F2> :set relativenumber!<CR>
 " F3 Toggles highlighted search
 noremap <F3> :set hlsearch! hlsearch?<CR>
-" F4 inserts timestamp
-nmap <F4> a<C-R>=strftime("%d-%m-%Y %I:%M %p")<CR><Esc>
-imap <F4> <C-R>=strftime("%d-%m-%Y %I:%M %p")<CR>
+" F4 Taglist
+nnoremap <silent> <F4> :TlistToggle<CR>
 " F5 make
 nnoremap <F5> :wall <CR>:make -j8<CR>
+" F6 inserts timestamp
+nmap <F6> a<C-R>=strftime("%d-%m-%Y %I:%M %p")<CR><Esc>
+imap <F6> <C-R>=strftime("%d-%m-%Y %I:%M %p")<CR>
+" F7 Opens a scratch window
+nnoremap <F7> :call GetScratch()<CR>
+
 set pastetoggle=<F11>
 
 function GetScratch()
@@ -58,7 +70,6 @@ function GetScratch()
     setlocal bufhidden=hide
     setlocal noswapfile
 endfunction
-nnoremap <F7> :call GetScratch()<CR>
 
 set scrolloff=5
 
@@ -71,7 +82,18 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
-set tags=tags
+" netrw
+let g:netrw_winsize = 25
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+
+" taglist
+"let Tlist_Use_Right_Window = 1
+let Tlist_WinWidth = 60
+" let Tlist_GainFocus_On_ToggleOpen = 1
+
+set tags=tags;/
 
 cmap w!! w !sudo tee > /dev/null %
 
@@ -90,9 +112,11 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 
 " Disable f1 help
-inoremap <f1> <esc>
-nnoremap <f1> <esc>
-vnoremap <f1> <esc>
+"inoremap <f1> <esc>
+"nnoremap <f1> <esc>
+"vnoremap <f1> <esc>
 
 " Makefile likes tabs
 autocmd FileType make setlocal noexpandtab
+command! -nargs=+ Cppman silent! call system("tmux split-window cppman " . expand(<q-args>))
+nnoremap <silent><buffer> <C-k> <Esc>:Cppman <cword><CR>
