@@ -39,8 +39,6 @@ complete -cf killall
 complete -cf pidof
 
 up() {
-    echo $(pwd)
-
     if [[ $1 == "" ]]
         then
             newdir=/
@@ -50,7 +48,6 @@ up() {
 
     while [[ "$(basename $newdir)" != *$1* ]] && [[ "$(basename $newdir)" != "/" ]]
     do
-        echo $newdir
         newdir=$(dirname $newdir)
     done
 
