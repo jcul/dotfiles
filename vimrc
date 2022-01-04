@@ -2,13 +2,18 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-color dracula
+set foldmethod=syntax
+set foldlevelstart=10
+" colorscheme dracula
+colorscheme apprentice
 set cinoptions=g0
 
 "let g:pathogen_disabled = []
 "execute pathogen#infect()
 
 set encoding=utf-8
+
+let mapleader=","
 
 " Tabs / Indentation
 set autoindent
@@ -19,8 +24,8 @@ set smartindent
 set softtabstop=4
 set tabstop=4
 
-set number
-set relativenumber
+" set number
+" set relativenumber
 
 set hidden
 set lazyredraw
@@ -36,10 +41,9 @@ set smartcase
 set path+=**
 set wildmenu
 
-"set backup
+set backup
 set backupdir=./.backup//,~/.backup//,.,/tmp//
 set directory=./.backup//,~/.backup//,.,/tmp//
-set nobackup
 
 " Remember Stuff
 set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo
@@ -49,7 +53,8 @@ set history=50
 " F1 switches between .cpp and .h
 map <F1> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 " F2 Toggles relative numbers
-noremap <F2> :set relativenumber!<CR>
+" noremap <F2> :set relativenumber!<CR>
+noremap <F2> :set number!<CR>
 " F3 Toggles highlighted search
 noremap <F3> :set hlsearch! hlsearch?<CR>
 " F4 Taglist
@@ -57,8 +62,10 @@ nnoremap <silent> <F4> :TlistToggle<CR>
 " F5 make
 nnoremap <F5> :wall <CR>:make -j8<CR>
 " F6 inserts timestamp
-nmap <F6> a<C-R>=strftime("%d-%m-%Y %I:%M %p")<CR><Esc>
-imap <F6> <C-R>=strftime("%d-%m-%Y %I:%M %p")<CR>
+" strftime("%d-%m-%Y %I:%M %p")
+nmap <F6> a<C-R>=strftime("%F")<CR><Esc>
+imap <F6> <C-R>=strftime("%F")<CR>
+cmap <F6> <C-R>=strftime("%F")<CR>
 " F7 Opens a scratch window
 nnoremap <F7> :call GetScratch()<CR>
 
@@ -120,3 +127,10 @@ inoremap <right> <nop>
 autocmd FileType make setlocal noexpandtab
 command! -nargs=+ Cppman silent! call system("tmux split-window cppman " . expand(<q-args>))
 nnoremap <silent><buffer> <C-k> <Esc>:Cppman <cword><CR>
+
+
+"highlight DiffAdd term=reverse cterm=bold ctermbg=22 ctermfg=white
+"highlight DiffAdd term=bold cterm=reverse ctermfg=23 ctermbg=0
+"highlight DiffChange term=reverse cterm=bold ctermbg=9 ctermfg=white
+"highlight DiffText term=reverse cterm=bold ctermbg=8 ctermfg=white
+"highlight DiffDelete term=reverse cterm=bold ctermbg=52 ctermfg=black
