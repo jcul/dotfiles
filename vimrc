@@ -1,11 +1,15 @@
-" colorscheme desert
-execute pathogen#infect()
+" execute pathogen#infect()
+packadd! dracula
+packadd! gruvbox
+
 syntax on
 filetype plugin indent on
 set foldmethod=syntax
 set foldlevelstart=10
-" colorscheme dracula
-colorscheme apprentice
+"colorscheme desert
+"colorscheme dracula
+autocmd vimenter * ++nested colorscheme gruvbox
+set background=dark
 set cinoptions=g0
 
 "let g:pathogen_disabled = []
@@ -24,8 +28,8 @@ set smartindent
 set softtabstop=4
 set tabstop=4
 
-" set number
-" set relativenumber
+set number
+set relativenumber
 
 set hidden
 set lazyredraw
@@ -53,8 +57,7 @@ set history=50
 " F1 switches between .cpp and .h
 map <F1> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 " F2 Toggles relative numbers
-" noremap <F2> :set relativenumber!<CR>
-noremap <F2> :set number!<CR>
+noremap <F2> :set relativenumber!<CR>
 " F3 Toggles highlighted search
 noremap <F3> :set hlsearch! hlsearch?<CR>
 " F4 Taglist
@@ -62,10 +65,9 @@ nnoremap <silent> <F4> :TlistToggle<CR>
 " F5 make
 nnoremap <F5> :wall <CR>:make -j8<CR>
 " F6 inserts timestamp
-" strftime("%d-%m-%Y %I:%M %p")
-nmap <F6> a<C-R>=strftime("%F")<CR><Esc>
-imap <F6> <C-R>=strftime("%F")<CR>
-cmap <F6> <C-R>=strftime("%F")<CR>
+nmap <F6> a<C-R>=strftime("%F %R")<CR><Esc>
+imap <F6> <C-R>=strftime("%F %R")<CR>
+cmap <F6> <C-R>=strftime("%F %R")<CR>
 " F7 Opens a scratch window
 nnoremap <F7> :call GetScratch()<CR>
 
@@ -93,7 +95,7 @@ augroup END
 let g:netrw_winsize = 25
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
+" let g:netrw_browse_split = 4
 
 " taglist
 "let Tlist_Use_Right_Window = 1
