@@ -15,6 +15,8 @@ export HISTFILESIZE=
 #HISTSIZE=1000
 #HISTFILESIZE=2000
 
+PATH=$PATH:$HOME/bin:$HOME/scripts
+
 export EDITOR=vim
 
 # check the window size after each command and, if necessary,
